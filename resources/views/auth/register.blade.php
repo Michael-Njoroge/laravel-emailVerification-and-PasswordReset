@@ -89,19 +89,20 @@ button:hover {
 
 
 <body>
-    <form>
+    <form id="register_form" >
+        @csrf
         <div class="container">
           <h1 style="text-align: center;">Sign Up</h1>
           <!-- <p>Please fill in this form to create an account.</p> -->
-      
+         
           <label for="email"><b>Name</b></label>
-          <input type="text" name="name" placeholder="Enter name" required>
+          <input type="text" name="name"  class="form-group" placeholder="Enter name" >
 
           <label for="email"><b>Email</b></label>
-          <input type="text" placeholder="Enter Email" name="email" required>
+          <input type="text" placeholder="Enter Email" name="email"  class="form-group">
           
           <label for="psw"><b>Password</b></label>
-          <input type="password" placeholder="Enter Password" name="password" required>
+          <input type="password" placeholder="Enter Password" name="password"  class="form-group">
 
           <label for="psw"><b>Confirm Password</b></label>
           <input type="password" placeholder="Confirm Password" name="password_confirmation">
@@ -112,5 +113,70 @@ button:hover {
           </div>
         </div>
       </form>
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+      <script src="{{asset('backend/assets/code/validate.min.js')}}"></script>
+
+      <script type="text/javascript">
+        $(document).ready(function(){
+            $('#register_form').submit(function(e){
+            e.preventDefault();
+
+            var formData = $(this).serialize();
+
+            $.ajax({
+                url: "http://127.0.0.1:8000/api/register",
+                type: "POST",
+                data: formData,
+                success:function(data){
+                    console.log(data);
+                
+                }
+            });
+        });
+    });
+        $(document).ready(function (){
+        $('#register_form').validate({
+            rules: {
+               name: {
+                    required : true,
+                }, 
+                email: {
+                    required : true,
+                }, 
+                password: {
+                    required : true,
+                }, 
+                
+                
+            },
+            messages :{
+               name: {
+                    required : 'Name field is required',
+                }, 
+                email: {
+                    required : 'Email field is required',
+                },
+                password: {
+                    required : 'Password field is required',
+                },
+                 
+
+            },
+            errorElement : 'span', 
+            errorPlacement: function (error,element) {
+                error.addClass('invalid-feedback');
+                element.closest('.form-group').append(error);
+            },
+            highlight : function(element, errorClass, validClass){
+                $(element).addClass('is-invalid');
+            },
+            unhighlight : function(element, errorClass, validClass){
+                $(element).removeClass('is-invalid');
+            },
+        });
+    });
+
+      </script>
 </body>
 </html>
