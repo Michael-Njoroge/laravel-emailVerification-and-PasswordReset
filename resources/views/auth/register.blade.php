@@ -37,22 +37,13 @@ body {
 input[type=text], input[type=password] {
   width: 100%;
   padding: 15px;
-  margin: 5px 0 22px 0;
+  margin: 5px 5px 22px 0;
   display: inline-block;
   border: none;
   background: #f7f7f7;
 	font-family: Montserrat,Arial, Helvetica, sans-serif;
 }
  
-input[type=phone] {
-  width: 81%;
-  padding: 15px;
-  margin: 5px 0 22px 0;
-  display: inline-block;
-  border: none;
-  background: #f7f7f7;
-}
-
 input[type=text]:focus, input[type=password]:focus, input[type=phone]:focus, select:focus {
   background-color: #ddd;
   outline: none;
@@ -96,26 +87,26 @@ button:hover {
           <!-- <p>Please fill in this form to create an account.</p> -->
          
           <label for="email"><b>Name</b></label>
-          <input type="text" name="name"  class="form-group" placeholder="Enter name" >
-
+          <input type="text" name="name" placeholder="Enter name" class="name form-group">
+           
           <label for="email"><b>Email</b></label>
-          <input type="text" placeholder="Enter Email" name="email"  class="form-group">
-          
+          <input type="text" placeholder="Enter Email" name="email" class="email form-group">
+           
           <label for="psw"><b>Password</b></label>
-          <input type="password" placeholder="Enter Password" name="password"  class="form-group">
-
+          <input type="password" placeholder="Enter Password" name="password" class="password form-group">
+           
           <label for="psw"><b>Confirm Password</b></label>
-          <input type="password" placeholder="Confirm Password" name="password_confirmation">
-         
+          <input type="password" placeholder="Confirm Password" name="password_confirmation"  >
+           
           <div class="clearfix">
-      
+       
             <button type="submit" class="btn">Sign Up</button>
           </div>
         </div>
       </form>
 
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-      <script src="{{asset('backend/assets/code/validate.min.js')}}"></script>
+      <script src="{{asset('../../../assets/validate.min.js')}}"></script>
 
       <script type="text/javascript">
         $(document).ready(function(){
@@ -130,15 +121,21 @@ button:hover {
                 data: formData,
                 success:function(data){
                     console.log(data);
-                
+                    if(data.message){
+
+                    }                
                 }
             });
         });
     });
-        $(document).ready(function (){
+  
+    </script>
+
+<script type="text/javascript">
+    $(document).ready(function (){
         $('#register_form').validate({
             rules: {
-               name: {
+                name: {
                     required : true,
                 }, 
                 email: {
@@ -147,7 +144,6 @@ button:hover {
                 password: {
                     required : true,
                 }, 
-                
                 
             },
             messages :{
@@ -160,7 +156,6 @@ button:hover {
                 password: {
                     required : 'Password field is required',
                 },
-                 
 
             },
             errorElement : 'span', 
@@ -176,7 +171,8 @@ button:hover {
             },
         });
     });
+    
+</script>
 
-      </script>
 </body>
 </html>
