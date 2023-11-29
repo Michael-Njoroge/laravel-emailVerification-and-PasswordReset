@@ -87,13 +87,13 @@ button:hover {
           <!-- <p>Please fill in this form to create an account.</p> -->
          
           <label for="email"><b>Name</b></label>
-          <input type="text" name="name" placeholder="Enter name" class="name form-group">
+          <input type="text" name="name" placeholder="Enter name" class="form-group">
            
           <label for="email"><b>Email</b></label>
-          <input type="text" placeholder="Enter Email" name="email" class="email form-group">
+          <input type="text" placeholder="Enter Email" name="email" class="form-group">
            
           <label for="psw"><b>Password</b></label>
-          <input type="password" placeholder="Enter Password" name="password" class="password form-group">
+          <input type="password" placeholder="Enter Password" name="password" class="form-group">
            
           <label for="psw"><b>Confirm Password</b></label>
           <input type="password" placeholder="Confirm Password" name="password_confirmation"  >
@@ -104,8 +104,8 @@ button:hover {
           </div>
         </div>
       </form>
-
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
       <script src="{{asset('../../../assets/validate.min.js')}}"></script>
 
       <script type="text/javascript">
