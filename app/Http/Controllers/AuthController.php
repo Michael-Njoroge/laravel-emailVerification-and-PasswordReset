@@ -37,11 +37,36 @@ class AuthController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Login user
      */
-    public function create()
+    public function login(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+
+        if($validator->fails()){
+            return response()->json($validator->errors());
+        }
+
+        if(!$token = auth()->attempt($validator->validated())){
+            return response()->json([
+                'status' => false,
+                'message'=>'Wrong credentials'
+            ]);
+        }
+        return $this->respondWithToken($token);
+    }
+
+    protected function respondWithToken($token)
+    {
+        return response()->json([
+            'status' => 'success',
+            'token' => $token,
+            'authorization' => 'bearer_token',
+            'expires_in' => auth()->factory()->getTTL()*60,
+        ]);
     }
 
     /**
