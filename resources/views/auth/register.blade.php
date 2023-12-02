@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>SignUp</title>
+    <link rel="stylesheet" href="{{asset('../../../assets/style.css')}}">
+
 </head>
  
 
@@ -41,7 +43,7 @@ body {
 input[type=text], input[type=password] {
   width: 100%;
   padding: 15px;
-  margin: 5px 0 22px 0;
+  margin: 5px 0 12px 0;
   display: inline-block;
   border: none;
   background: #f7f7f7;
@@ -90,17 +92,17 @@ button:hover {
         <div class="container">
           <h1 style="text-align: center;">Sign Up</h1>
           <!-- <p>Please fill in this form to create an account.</p> -->
-         <div class="form-group"> 
+         <div class="form-controller"> 
           <label for="email"><b>Name</b></label>
           <input type="text" name="name" id="name" placeholder="Enter name" >
           </div>
 
-          <div class="form-group "> 
+          <div class="form-controller "> 
           <label for="email"><b>Email</b></label>
           <input type="text" placeholder="Enter Email" name="email" id="email" >
           </div>
 
-          <div class="form-group">
+          <div class="form-controller">
           <label for="psw"><b>Password</b></label>
           <input type="password" placeholder="Enter Password" name="password" id="password" >
           </div>
@@ -170,7 +172,7 @@ button:hover {
             errorElement : 'span', 
             errorPlacement: function (error,element) {
                 error.addClass('invalid-feedback');
-                element.closest('.form-group').append(error);
+                element.closest('.form-controller').append(error);
             },
             highlight : function(element, errorClass, validClass){
                 $(element).addClass('is-invalid');
