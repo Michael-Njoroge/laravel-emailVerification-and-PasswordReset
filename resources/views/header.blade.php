@@ -18,6 +18,8 @@
             window.location.href = '/profile';
         }
 
+        $(".logout").hide();
+
     }
     else{
 
