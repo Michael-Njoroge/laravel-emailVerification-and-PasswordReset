@@ -1,0 +1,28 @@
+.invalid-feedback {
+  display: none;
+  width: 100%;
+  
+  font-size: 0.875em;
+  color: #ff3366;
+}
+ 
+
+.was-validated :invalid ~ .invalid-feedback,
+ .is-invalid ~ .invalid-feedback,
+.is-invalid ~ .invalid-tooltip {
+  display: block;
+}
+  
+.was-validated .form-select:invalid, .form-select.is-invalid {
+  border-color: #ff3366;
+}
+ 
+ 
+ .form-control-color.is-invalid {
+  width: calc(3rem + calc(1.5em + 0.938rem));
+}
+
+ 
+ 
+ 
+ 

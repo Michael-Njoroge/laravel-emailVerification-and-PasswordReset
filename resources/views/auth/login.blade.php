@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>SignUp</title>
+    <title>SignIn</title>
 </head>
  
-
+<link rel="stylesheet" href="{{asset('../../../assets/style.css')}}">
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
@@ -41,7 +41,7 @@ body {
 input[type=text], input[type=password] {
   width: 100%;
   padding: 15px;
-  margin: 5px 0 22px 0;
+  margin: 5px 0 12px 0;
   display: inline-block;
   border: none;
   background: #f7f7f7;
@@ -72,45 +72,32 @@ button {
 button:hover {
   opacity:1;
 }
-
-/* Change styles for signup button on extra small screens */
-@media screen and (max-width: 300px) {
-  .signupbtn {
-     width: 100%;
-  }
-}
+ 
 </style>
 
 <!-- End of styling the login page -->
 
 
 <body>
-    <form id="register_form" >
+    <form id="login_form" >
         @csrf
         <div class="container">
-          <h1 style="text-align: center;">Sign Up</h1>
-          <!-- <p>Please fill in this form to create an account.</p> -->
-         <div class="form-group"> 
-          <label for="email"><b>Name</b></label>
-          <input type="text" name="name" id="name" placeholder="Enter name" >
-          </div>
-
-          <div class="form-group "> 
+          <h1 style="text-align: center;">Sign In</h1>
+          <!-- <p>Sign In to your account.</p> -->
+         
+          <div class="form-control "> 
           <label for="email"><b>Email</b></label>
           <input type="text" placeholder="Enter Email" name="email" id="email" >
           </div>
 
-          <div class="form-group">
+          <div class="form-control">
           <label for="psw"><b>Password</b></label>
           <input type="password" placeholder="Enter Password" name="password" id="password" >
           </div>
-
-          <label for="psw"><b>Confirm Password</b></label>
-          <input type="password" placeholder="Confirm Password" name="password_confirmation"  >
-           
+ 
           <div class="clearfix">
        
-            <button type="submit" class="btn">Sign Up</button>
+            <button type="submit" class="btn">Sign In</button>
           </div>
         </div>
       </form>
@@ -119,13 +106,13 @@ button:hover {
 
       <script type="text/javascript">
         $(document).ready(function(){
-            $('#register_form').submit(function(e){
+            $('#login_form').submit(function(e){
             e.preventDefault();
 
             var formData = $(this).serialize();
 
             $.ajax({
-                url: "http://127.0.0.1:8000/api/register",
+                url: "http://127.0.0.1:8000/api/login",
                 type: "POST",
                 data: formData,
                 success:function(data){
@@ -142,11 +129,9 @@ button:hover {
 
 <script type="text/javascript">
     $(document).ready(function (){
-        $('#register_form').validate({
+        $('#login_form').validate({
             rules: {
-                name: {
-                    required : true,
-                }, 
+                  
                 email: {
                     required : true,
                 }, 
@@ -156,9 +141,7 @@ button:hover {
                 
             },
             messages :{
-               name: {
-                    required : 'Name field is required',
-                }, 
+               
                 email: {
                     required : 'Email field is required',
                 },
@@ -170,7 +153,7 @@ button:hover {
             errorElement : 'span', 
             errorPlacement: function (error,element) {
                 error.addClass('invalid-feedback');
-                element.closest('.form-group').append(error);
+                element.closest('.form-control').append(error);
             },
             highlight : function(element, errorClass, validClass){
                 $(element).addClass('is-invalid');
