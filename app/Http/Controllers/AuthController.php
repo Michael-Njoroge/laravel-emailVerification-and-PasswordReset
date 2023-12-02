@@ -42,7 +42,7 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(),[
-            'email' => 'required',
+            'email' => 'required|email',
             'password' => 'required',
         ]);
 
@@ -52,7 +52,7 @@ class AuthController extends Controller
 
         if(!$token = auth()->attempt($validator->validated())){
             return response()->json([
-                'status' => false,
+                'status' => 'false',
                 'message'=>'Wrong credentials'
             ]);
         }
