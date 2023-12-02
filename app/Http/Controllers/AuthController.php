@@ -70,11 +70,24 @@ class AuthController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * logout user.
      */
-    public function store(Request $request)
+    public function logout()
     {
-        //
+        try
+        {
+        auth()->logout();
+         return response()->json([
+            'status' => 'true',
+            'message' => 'User Logged out Successfully'
+         ]);
+        }
+        catch(\Exception $e){
+            return response()->json([
+                'status' => 'false',
+                'message' => $e->getMessage(),
+             ]);
+        }
     }
 
     /**
