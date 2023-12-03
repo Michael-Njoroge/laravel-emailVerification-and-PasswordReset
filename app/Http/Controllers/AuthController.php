@@ -158,7 +158,7 @@ class AuthController extends Controller
             if(count($user) > 0){
                 $random = Str::random(40);
                 $domain = URL::to('/');
-                $url = $domain.'/'.$random;
+                $url = $domain.'/verify-email/'.$random;
 
                 $data['url'] = $url;
                 $data['email'] = $email; 
