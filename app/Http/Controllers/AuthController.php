@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
@@ -181,7 +182,7 @@ class AuthController extends Controller
             else{
                 return response()->json([
                 'status' => 'false',
-                'message' => 'User with the email is not Found'
+                'message' => 'User with this email is not Found'
                 ]);
             }
         }
@@ -191,6 +192,26 @@ class AuthController extends Controller
                 'status' => 'false',
                 'message' => 'Unauthorized'
             ]);
+        }
+    }
+
+    public function verifyEmail($token)
+    {
+        $user = User::where('remember_token', $token)->get();
+
+        if(count($user)>0){
+            $dateTime = Carbon::now()->format('Y-M-d H:i:s');
+            $user = User::find($user[0]['id']);
+            $user->remember_token = '';
+            $user->is_verified = 1;
+            $user->email_verified_at = $dateTime;
+            $user -> save();
+
+            return "<h1>Email Verified Successfully</h1>";
+
+        }
+        else{
+            return view('404');
         }
     }
 }
