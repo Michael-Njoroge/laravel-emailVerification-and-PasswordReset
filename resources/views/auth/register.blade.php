@@ -6,6 +6,7 @@
   }
   .result{
     color: green;
+    text-align: center;
   }
   .heading{
     font-weight: bold;
@@ -57,7 +58,7 @@
 
      <form id="register_form" >
         @csrf
-        <p class="result" style="text-align: center;"></p>
+        <p class="result"></p>
           <h1 style="text-align: center;">Sign Up</h1>
           <p class="heading">Please fill in this form to create an account.</p>
  

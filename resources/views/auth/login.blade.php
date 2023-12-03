@@ -69,7 +69,9 @@
  
           <button type="submit" class="btn">Sign In</button>
          </div>
+         
       <p class="result" style="text-align: center;"></p>
+
       </form>
       <script type="text/javascript">
         $(document).ready(function(){

@@ -1,18 +1,24 @@
 @include('../header')
 
 <style>
+    
     .update
     {
         cursor: pointer;
         background-color: green;
         border-style: none;
-        border-radius: 25px;
+        border-radius: 15px;
         padding: 12px 6px;
         width: 100%;
         color: #fff;
         font-size: 15px;
         font-weight: bold;
+        margin-top: 32px;
     }
+    .result{
+    color: green;
+    text-align: center;
+  }
   
     input
     {
@@ -32,14 +38,14 @@
     {
         background: gainsboro;
         width: 500px;
-        height: 350px;
+        height: 400px;
         align-items: center;
         justify-content: center;
         overflow: hidden;
         padding: 12px;
         transform: translateY(30%);   
         margin: 0 auto;    
-        border-radius: 5px;         
+        border-radius: 20px;         
     }
 
     .email_verify
@@ -49,18 +55,28 @@
 </style>
 
 
-<form action="">
+<form action="" id="profile_form">
+@csrf
+
+<p class="result"></p>
 
 <div class="email_verify">
     <h1>Hello, <span class="name"></span></h1>
-
     <p><b>Email:- <span class="email"></span> &nbsp; <span class="verify"></span> </b></p>
 </div>
-<input type="text" placeholder="Enter Name" name="email" id="name" required>
-<br><br>
-<input type="email" placeholder="Enter Email" name="email" id="email" required>
-<br><br><br>
+<input type="text" hidden name="id" id="user_id">
+<input type="text" placeholder="Enter Name" name="name" id="name">
+<br>
+<span class="error name_err" style="color: red;"></span>
+<br>
+
+<input type="text" placeholder="Enter Email" name="email" id="email">
+<br>
+<span class="error email_err" style="color: red;"></span>
+<br>
+
 <button type="submit" class="update">Update Profile</button>
+
 </form>
 
 <script>
@@ -71,9 +87,9 @@
             headers: {'Authorization': localStorage.getItem('access_token')},
             success: function(data){
                 if(data.status == 'true'){
-                    console.log(data);
                     $(".name").text(data.data.name);
                     $(".email").text(data.data.email);
+                    $("#user_id").val(data.data.id);
                     $("#name").val(data.data.name);
                     $("#email").val(data.data.email);
 
@@ -87,5 +103,36 @@
                 }
             }
         });
+        $("#profile_form").submit(function(e){
+            e.preventDefault();
+
+            var formData = $(this).serialize();
+
+            $.ajax({
+            url: "http://127.0.0.1:8000/api/profile/update",
+            type: "POST",
+            data: formData,
+            headers: {'Authorization':localStorage.getItem('access_token')},
+            success: function(data){
+                if(data.status == 'true'){
+                    $(".error").text("");
+                    setTimeout(function(){
+                        $(".result").text("")
+                    },1500);
+                    $(".result").text("User Updated Successfully");
+                }else{
+                    errorMessage(data);
+                }
+            }
+            });
+        });
+
+        function errorMessage(message){
+          $(".error").text("");
+          $.each(message, function (key,value){
+              $("."+key+"_err").text(value);
+ 
+          });
+        }
     });
 </script>
