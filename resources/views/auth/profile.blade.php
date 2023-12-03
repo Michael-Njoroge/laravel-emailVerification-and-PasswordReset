@@ -1,6 +1,20 @@
 @include('../header')
 <h1>Hello, <span class="name"></span></h1>
 
+<style>
+    .update{
+            cursor: pointer;
+            background-color: gray;
+            border-style: none;
+            border-radius: 25px;
+            padding: 5px 6px;
+            width: 125px;
+            color: #fff;
+            font-size: 15px;
+            font-weight: bold;
+    }
+</style>
+
 <div class="email_verify">
     <p><b>Email:- <span class="email"></span> &nbsp; <span class="verify"></span> </b></p>
 </div>
@@ -10,7 +24,7 @@
 <br><br>
 <input type="email" placeholder="Enter Email" name="email" id="email" required>
 <br><br>
-<input type="submit" value="Update Profile">
+<input type="submit" class="update" value="Update Profile">
 </form>
 
 <script>

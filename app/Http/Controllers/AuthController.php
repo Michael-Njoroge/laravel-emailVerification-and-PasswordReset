@@ -107,4 +107,39 @@ class AuthController extends Controller
              ]);
         }
     }
+
+    /**
+     * update user profile
+     */
+    public function profileUpdate(Request $request)
+    {
+        if(auth()->user()){
+        $validator = Validator::make($request->all(),[
+            'name' => 'required|string',
+            'email' => 'required|string|email'
+        ]);
+
+        if($validator -> fails()){
+            return response()->json($validator->errors());
+        }
+
+        $user = auth()->user();
+        $user -> name = $request->name;
+        $user ->email = $request->email;
+
+        $user -> save();
+        
+        return response()->json([
+            'status'=> 'true',
+            'data' => $user,
+            'message' => 'User Data Updated Successfully'
+        ]);
+    }
+    else{
+        return response()->json([
+            'status' => 'false',
+            'message' => 'Unauthorized'
+        ]);
+    }
+    }
 }

@@ -3,6 +3,19 @@
 <head>
     <title>Test App</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        .logout{
+            cursor: pointer;
+            background-color: rgb(213, 45, 20);
+            border-style: none;
+            border-radius: 25px;
+            padding: 5px 1px;
+            width: 115px;
+            color: #fff;
+            font-size: 15px;
+            font-weight: bold;
+          }
+    </style>
 </head>
 <body>
 
