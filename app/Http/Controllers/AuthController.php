@@ -153,7 +153,7 @@ class AuthController extends Controller
     public function sendVerifyEmail($email)
     {
         if(auth()->user()){
-            $user = User::find('email', $email);
+            $user = User::where('email', $email)->get();
 
             if(count($user) > 0){
                 $random = Str::random(40);
