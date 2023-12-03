@@ -44,7 +44,7 @@
     {
         background: gainsboro;
         width: 500px;
-        height: 510px;
+        height: 520px;
         align-items: center;
         justify-content: center;
         overflow: hidden;
@@ -102,8 +102,7 @@
                       $("#register_form")[0].reset();
                       $(".error").text("");
                       $(".result").text(data.message);
-                      localStorage.setItem("access_token",data.authorization+" "+data.token);
-                      window.open("/profile","_self");
+                      window.location.href = '/login';
                     } else{
                       errorMessage(data);
                     } 

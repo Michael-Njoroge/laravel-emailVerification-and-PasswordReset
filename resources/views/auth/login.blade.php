@@ -4,6 +4,9 @@
   span, .result{
     color: red;
   }
+  .heading{
+    font-weight: bold;
+  }
   .btn
     {
         cursor: pointer;
@@ -37,11 +40,11 @@
     {
         background: gainsboro;
         width: 500px;
-        height: 450px;
+        height: 400px;
         align-items: center;
         justify-content: center;
         overflow: hidden;
-         transform: translateY(15%);   
+        transform: translateY(25%);   
         margin: 0 auto;    
         border-radius: 20px;         
     }
@@ -52,18 +55,17 @@
         @csrf
         <div style="text-align: center;">
           <h1 style="text-align: center;">Sign In</h1>
-          <!-- <p>Please fill in this form to create an account.</p> -->
-          <label for="email"><b>Email</b></label>
+          <p class="heading">Welcome Back, login to your account.</p>
+ 
           <input type="text" placeholder="Enter Email" name="email" id="email" autocomplete="off" >
           <br>
           <span class="error email_err"></span>
-          <br><br> 
+          <br>
          
-          <label for="psw"><b>Password</b></label>
           <input type="password" placeholder="Enter Password" name="password" id="password" >
           <br>
           <span class="error password_err"></span>
-          <br><br> 
+          <br>
  
           <button type="submit" class="btn">Sign In</button>
          </div>
