@@ -25,6 +25,7 @@
     position: absolute;
     justify-content: center;
     align-items: center;
+    transform: translateX(60%);
   }
   
     input
@@ -92,10 +93,10 @@
 <span class="error email_err" style="color: red;"></span>
 <br>
 
-<button type="submit" class="update">Update Profile</button>
+<button class="update">Update Profile</button>
 
 </form>
-<div class="result" style="color: green; text-align: center;"></div>
+<div class="result"></div>
 
 
 <script>
@@ -122,7 +123,7 @@
                 }
             }
         });
-        
+
         //profile update
 
         $("#profile_form").submit(function(e){
