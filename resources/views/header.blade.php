@@ -14,6 +14,9 @@
             color: #fff;
             font-size: 15px;
             font-weight: bold;
+            top: 12px;
+            right: 12px; 
+            position: absolute;
           }
     </style>
 </head>

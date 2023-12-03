@@ -1,30 +1,66 @@
 @include('../header')
-<h1>Hello, <span class="name"></span></h1>
 
 <style>
-    .update{
-            cursor: pointer;
-            background-color: gray;
-            border-style: none;
-            border-radius: 25px;
-            padding: 5px 6px;
-            width: 125px;
-            color: #fff;
-            font-size: 15px;
-            font-weight: bold;
+    .update
+    {
+        cursor: pointer;
+        background-color: green;
+        border-style: none;
+        border-radius: 25px;
+        padding: 5px 6px;
+        width: 100%;
+        color: #fff;
+        font-size: 15px;
+        font-weight: bold;
+    }
+  
+    input
+    {
+        border-style: none;
+        border-radius: 15px;
+        padding: 5px 2px;
+        background: gray;
+        margin: 2px;
+        text-align: center;
+        width: 100%;
+        font-size: 18px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    form
+    {
+        background: gainsboro;
+        width: 500px;
+        height: 350px;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        padding: 12px;
+        transform: translateY(30%);   
+        margin: 0 auto;    
+        border-radius: 5px;         
+    }
+
+    .email_verify
+    {
+        text-align: center;
     }
 </style>
 
-<div class="email_verify">
-    <p><b>Email:- <span class="email"></span> &nbsp; <span class="verify"></span> </b></p>
-</div>
 
 <form action="">
+
+<div class="email_verify">
+    <h1>Hello, <span class="name"></span></h1>
+
+    <p><b>Email:- <span class="email"></span> &nbsp; <span class="verify"></span> </b></p>
+</div>
 <input type="text" placeholder="Enter Name" name="email" id="name" required>
 <br><br>
 <input type="email" placeholder="Enter Email" name="email" id="email" required>
-<br><br>
-<input type="submit" class="update" value="Update Profile">
+<br><br><br>
+<button type="submit" class="update">Update Profile</button>
 </form>
 
 <script>
