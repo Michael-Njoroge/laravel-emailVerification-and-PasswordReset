@@ -207,7 +207,7 @@ class AuthController extends Controller
             $user->email_verified_at = $dateTime;
             $user -> save();
 
-            return "<h1>Email Verified Successfully</h1>";
+            return view('mail.verified');
 
         }
         else{

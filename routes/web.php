@@ -27,7 +27,7 @@ Route::get('/register', function () {
 
 Route::get('/profile', function () {
     return view('auth.profile');
-});
+})->name('profile.view');
 
 Route::get('/verify-email/{token}',[AuthController::class,'verifyEmail']) -> name('profile.email.verified');
 

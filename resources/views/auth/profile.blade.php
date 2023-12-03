@@ -1,7 +1,12 @@
 @include('../header')
 
 <style>
-    
+    .verified{
+        color: green;
+    }
+    .verifying{
+        color: red;
+    }
     .update
     {
         cursor: pointer;
@@ -94,9 +99,9 @@
                     $("#email").val(data.data.email);
 
                     if(data.data.email_verified_at == null || data.data.email_verified_at == ''){
-                        $(".verify").html("<a href=''>Verify</a>");
+                        $(".verify").addClass("verifying").html("<a href=''>Verify</a>");
                     }else{
-                        $(".verify").text("Verified");
+                        $(".verify").addClass("verified").text("Verified");
                     }
                 }else{
                     alert(data.message);
