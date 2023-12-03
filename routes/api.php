@@ -25,4 +25,5 @@ Route::group(['middleware' => 'api'],function($routes){
     Route::get('/logout',[AuthController::class,'logout']) -> name('logout');
     Route::get('/profile',[AuthController::class,'profile']) -> name('profile');
     Route::post('/profile/update',[AuthController::class,'profileUpdate']) -> name('profile.update');
+    Route::get('/send-email/{email}',[AuthController::class,'sendVerifyEmail']) -> name('profile.email.verify');
 });

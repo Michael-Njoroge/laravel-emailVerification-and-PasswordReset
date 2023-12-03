@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
-
+ 
 class AuthController extends Controller
 {
     /**
@@ -127,7 +130,7 @@ class AuthController extends Controller
         $user -> name = $request->name;
         $user ->email = $request->email;
 
-        $user -> save();
+        $user->save();
         
         return response()->json([
             'status'=> 'true',
@@ -141,5 +144,53 @@ class AuthController extends Controller
             'message' => 'Unauthorized'
         ]);
     }
+}
+
+    /**
+     * send verification mail
+     */
+
+    public function sendVerifyEmail($email)
+    {
+        if(auth()->user()){
+            $user = User::find('email', $email);
+
+            if(count($user) > 0){
+                $random = Str::random(40);
+                $domain = URL::to('/');
+                $url = $domain.'/'.$random;
+
+                $data['url'] = $url;
+                $data['email'] = $email; 
+                $data['title'] = "Email Verification"; 
+                $data['body'] = "Please click the link below to verify your email"; 
+
+                Mail::send('mail.verifyMail', ['data' => $data],function($message) use ($data){
+                    $message->to($data['email']) -> subject($data['title']);
+                });
+
+                $user = User::find($user[0]['id']);
+                $user->remember_token = $random;
+                $user->save();
+
+                return response()->json([
+                    'status' => 'true',
+                    'message' => 'Please check your email for verification'
+                    ]);
+            }
+            else{
+                return response()->json([
+                'status' => 'false',
+                'message' => 'User with the email is not Found'
+                ]);
+            }
+        }
+        else
+        {
+            return response()->json([
+                'status' => 'false',
+                'message' => 'Unauthorized'
+            ]);
+        }
     }
 }
