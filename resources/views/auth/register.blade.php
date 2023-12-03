@@ -4,41 +4,86 @@
   span{
     color: red;
   }
+  .result{
+    color: green;
+  }
+  .heading{
+    font-weight: bold;
+  }
+  
+  .btn
+    {
+        cursor: pointer;
+        background-color: green;
+        border-style: none;
+        border-radius: 15px;
+        padding: 12px 6px;
+        width: 90%;
+        color: #fff;
+        font-size: 15px;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+  
+    input
+    {
+        border-style: none;
+        border-radius: 15px;
+        padding: 12px 2px;
+        background: #fff;
+        margin: 2px;
+        text-align: center;
+        width: 90%;
+        font-size: 18px;
+        font-weight: bold;
+        outline: none;
+        
+     }
+
+    form
+    {
+        background: gainsboro;
+        width: 500px;
+        height: 510px;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        transform: translateY(10%);   
+        margin: 0 auto;    
+        border-radius: 20px;  
+        text-align: center;       
+    }
 </style>
 
      <form id="register_form" >
         @csrf
-        <div style="text-align: center;">
+        <p class="result" style="text-align: center;"></p>
           <h1 style="text-align: center;">Sign Up</h1>
-          <!-- <p>Please fill in this form to create an account.</p> -->
-           <label for="email"><b>Name</b></label>
+          <p class="heading">Please fill in this form to create an account.</p>
+ 
           <input type="text" name="name" id="name" placeholder="Enter name" >
           <br>
           <span class="error name_err"></span>
-          <br><br> 
+          <br>
 
-           <label for="email"><b>Email</b></label>
           <input type="email" placeholder="Enter Email" name="email" id="email" >
           <br>
           <span class="error email_err"></span>
-          <br><br> 
+          <br>
          
-          <label for="psw"><b>Password</b></label>
           <input type="password" placeholder="Enter Password" name="password" id="password" >
           <br>
           <span class="error password_err"></span>
-          <br><br> 
+          <br>
 
-          <label for="psw"><b>Confirm Password</b></label>
           <input type="password" placeholder="Confirm Password" name="password_confirmation">
           <br>
           <span class="error password_confirmation_err"></span>
-          <br><br> 
+          <br>
 
           <button type="submit" class="btn">Sign Up</button>
-         </div>
+ 
       </form>
-      <p class="result" style="text-align: center;"></p>
 
       <script type="text/javascript">
         $(document).ready(function(){
@@ -56,7 +101,9 @@
                     if(data.message){
                       $("#register_form")[0].reset();
                       $(".error").text("");
-                      $(".result").text(data.message)
+                      $(".result").text(data.message);
+                      localStorage.setItem("access_token",data.authorization+" "+data.token);
+                      window.open("/profile","_self");
                     } else{
                       errorMessage(data);
                     } 
