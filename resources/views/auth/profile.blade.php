@@ -4,9 +4,8 @@
     .verified{
         color: green;
     }
-    .verifying{
-        color: red;
-    }
+    
+   
     .update
     {
         cursor: pointer;
@@ -23,6 +22,9 @@
     .result{
     color: green;
     text-align: center;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
   }
   
     input
@@ -57,13 +59,23 @@
     {
         text-align: center;
     }
+    .verify_email{
+            cursor: pointer;
+            background-color: rgb(213, 45, 20);
+            border-style: none;
+            border-radius: 25px;
+            padding: 5px 1px;
+            width: 110px;
+            color: #fff;
+            font-size: 15px;
+            font-weight: bold;
+          }
 </style>
 
 
 <form action="" id="profile_form">
 @csrf
 
-<p class="result"></p>
 
 <div class="email_verify">
     <h1>Hello, <span class="name"></span></h1>
@@ -83,6 +95,8 @@
 <button type="submit" class="update">Update Profile</button>
 
 </form>
+<div class="result" style="color: green; text-align: center;"></div>
+
 
 <script>
     $(document).ready(function(){
@@ -98,8 +112,8 @@
                     $("#name").val(data.data.name);
                     $("#email").val(data.data.email);
 
-                    if(data.data.email_verified_at == null || data.data.email_verified_at == ''){
-                        $(".verify").addClass("verifying").html("<a href=''>Verify</a>");
+                    if(data.data.is_verified == 0){
+                        $(".verify").html("<button class='verify_email' data-id='"+data.data.email+"'>Verify</button>");
                     }else{
                         $(".verify").addClass("verified").text("Verified");
                     }
@@ -108,6 +122,9 @@
                 }
             }
         });
+        
+        //profile update
+
         $("#profile_form").submit(function(e){
             e.preventDefault();
 
@@ -139,5 +156,20 @@
  
           });
         }
+
+        //email verification
+        $(document).on('click','.verify_email',function(){
+            var email = $(this).attr('data-id');
+            console.log(email);
+            $.ajax({
+            url: "http://127.0.0.1:8000/api/send-email/"+email,
+            type: "GET",
+            headers: {'Authorization': localStorage.getItem('access_token')},
+            success: function(data){
+                $('.result').text(data.message);
+            }
+            });
+        });
+
     });
 </script>

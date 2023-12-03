@@ -85,8 +85,7 @@
                 type: "POST",
                 data: formData,
                 success:function(data){
-                    console.log(data);
-                    $(".error").text("");
+                     $(".error").text("");
                      if(data.status == 'false'){
                         $("#login_form")[0].reset();
                         $(".result").text(data.message);
