@@ -16,11 +16,11 @@ use App\Http\Controllers\AuthController;
  
 Route::get('/', function () {
     return view('auth.login');
-});
+})->name('user.login');
 
 Route::get('/register', function () {
     return view('auth.register');
-});
+})->name('registration');
 
 Route::get('/profile', function () {
     return view('auth.profile');

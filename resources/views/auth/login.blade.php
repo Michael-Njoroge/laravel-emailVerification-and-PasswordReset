@@ -48,6 +48,21 @@
         margin: 0 auto;    
         border-radius: 20px;         
     }
+
+    a{
+      text-decoration: none;
+      font-size: 16px;
+      color: blue;
+      font-weight: bold;
+       width: 50px;
+      padding: 2px 5px;
+     }
+    a:visited,a:active{
+      text-decoration: none;
+    }
+    a:hover{
+      text-decoration: underline;
+    }
   
 </style>
 
@@ -68,7 +83,9 @@
           <br>
  
           <button type="submit" class="btn">Sign In</button>
+          <p>Dont have an account? <a href="{{route('registration')}}">Register</a></p>
          </div>
+
          
       <p class="result" style="text-align: center;"></p>
 

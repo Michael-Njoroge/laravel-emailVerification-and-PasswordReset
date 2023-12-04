@@ -5,7 +5,6 @@
         color: green;
     }
     
-   
     .update
     {
         cursor: pointer;
@@ -22,12 +21,13 @@
     .result{
     color: green;
     text-align: center;
-    position: relative;
+    position: absolute;
     justify-content: center;
     align-items: center;
     transform: translateX(-1%);
     padding: 5px;
-   }
+    left: 45%;
+    }
   
     input
     {
@@ -92,7 +92,7 @@
 <input type="text" placeholder="Enter Email" name="email" id="email">
 <br>
 <span class="error email_err" style="color: red;"></span>
-<br>
+<br>&nbsp;
 
 <button class="update">Update Profile</button>
 

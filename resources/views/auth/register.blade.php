@@ -54,6 +54,20 @@
         border-radius: 20px;  
         text-align: center;       
     }
+    a{
+      text-decoration: none;
+      font-size: 16px;
+      color: blue;
+      font-weight: bold;
+       width: 50px;
+      padding: 2px 5px;
+     }
+    a:visited,a:active{
+      text-decoration: none;
+    }
+    a:hover{
+      text-decoration: underline;
+    }
 </style>
 
      <form id="register_form" >
@@ -83,6 +97,7 @@
           <br>
 
           <button type="submit" class="btn">Sign Up</button>
+          <p>Already have an account? <a href="{{route('user.login')}}">Login</a></p>
  
       </form>
 
