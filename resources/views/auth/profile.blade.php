@@ -22,11 +22,12 @@
     .result{
     color: green;
     text-align: center;
-    position: absolute;
+    position: relative;
     justify-content: center;
     align-items: center;
-    transform: translateX(60%);
-  }
+    transform: translateX(-1%);
+    padding: 5px;
+   }
   
     input
     {
@@ -141,7 +142,7 @@
                     $(".error").text("");
                     setTimeout(function(){
                         $(".result").text("")
-                    },1500);
+                    },3500);
                     $(".result").text("User Updated Successfully");
                 }else{
                     errorMessage(data);

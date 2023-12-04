@@ -67,7 +67,7 @@
           <span class="error name_err"></span>
           <br>
 
-          <input type="email" placeholder="Enter Email" name="email" id="email" >
+          <input type="text" placeholder="Enter Email" name="email" id="email" >
           <br>
           <span class="error email_err"></span>
           <br>
@@ -103,7 +103,7 @@
                       $("#register_form")[0].reset();
                       $(".error").text("");
                       $(".result").text(data.message);
-                      window.location.href = '/login';
+                      window.location.href = '/';
                     } else{
                       errorMessage(data);
                     } 

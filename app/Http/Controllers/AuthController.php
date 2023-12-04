@@ -175,7 +175,7 @@ class AuthController extends Controller
                 $user->save();
 
                 return response()->json([
-                    'status' => 'true',
+                    'status' => true,
                     'message' => 'Please check your email for verification'
                     ]);
             }

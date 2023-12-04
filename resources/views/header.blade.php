@@ -27,7 +27,7 @@
 <script>
     var token = localStorage.getItem('access_token');
 
-    if( window.location.pathname == '/register' || window.location.pathname == '/login')
+    if( window.location.pathname == '/register' || window.location.pathname == '/')
     {
 
         if(token != null){
@@ -40,7 +40,7 @@
     else{
 
         if(token == null){
-            window.location.href = '/login';
+            window.location.href = '/';
         }
 
     }
@@ -57,7 +57,7 @@
                     if(data.status == 'true')
                     {
                         localStorage.removeItem('access_token');
-                        window.location.href = 'login'
+                        window.location.href = '/'
                     }
                     else{
                         alert(data.message)
