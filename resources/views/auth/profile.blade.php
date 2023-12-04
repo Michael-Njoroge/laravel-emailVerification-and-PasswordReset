@@ -24,10 +24,13 @@
     position: absolute;
     justify-content: center;
     align-items: center;
-    transform: translateX(-1%);
-    padding: 5px;
-    left: 45%;
-    }
+    transform: translateX(1%);
+    padding: 0;
+    left: 25%;
+    font-size: 20px;
+    top: 1px;
+    transition: ease 1s;
+     }
   
     input
     {
@@ -43,7 +46,7 @@
         text-transform: uppercase;
     }
 
-    form
+    .form
     {
         background: gainsboro;
         width: 500px;
@@ -54,7 +57,7 @@
         padding: 12px;
         transform: translateY(30%);   
         margin: 0 auto;    
-        border-radius: 20px;         
+        border-radius: 20px;    
     }
 
     .email_verify
@@ -74,31 +77,32 @@
           }
 </style>
 
+<div class="form">
 
-<form action="" id="profile_form">
-@csrf
-
-
-<div class="email_verify">
-    <h1>Hello, <span class="name"></span></h1>
-    <p><b>Email:- <span class="email"></span> &nbsp; <span class="verify"></span> </b></p>
-</div>
-<input type="text" hidden name="id" id="user_id">
-<input type="text" placeholder="Enter Name" name="name" id="name">
-<br>
-<span class="error name_err" style="color: red;"></span>
-<br>
-
-<input type="text" placeholder="Enter Email" name="email" id="email">
-<br>
-<span class="error email_err" style="color: red;"></span>
-<br>&nbsp;
-
-<button class="update">Update Profile</button>
-
-</form>
 <div class="result"></div>
+        <div class="email_verify">
+            <h1>Hello, <span class="name"></span></h1>
+            <p><b>Email:- <span class="email"></span> &nbsp; <span class="verify"></span> </b></p>
+        </div>
+        <form action="" id="profile_form">
+        @csrf
 
+        <input type="text" hidden name="id" id="user_id">
+        <input type="text" placeholder="Enter Name" name="name" id="name">
+        <br>
+        <span class="error name_err" style="color: red;"></span>
+        <br>
+
+        <input type="text" placeholder="Enter Email" name="email" id="email">
+        
+        <span class="error email_err" style="color: red;"></span>
+        &nbsp;
+
+        <button class="update">Update Profile</button>
+
+        </form>
+
+</div>
 
 <script>
     $(document).ready(function(){
@@ -142,7 +146,7 @@
                     $(".error").text("");
                     setTimeout(function(){
                         $(".result").text("")
-                    },3500);
+                    },1500);
                     $(".result").text("User Updated Successfully");
                 }else{
                     errorMessage(data);
