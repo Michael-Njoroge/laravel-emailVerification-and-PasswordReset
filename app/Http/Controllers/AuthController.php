@@ -63,16 +63,7 @@ class AuthController extends Controller
         return $this->respondWithToken($token);
     }
 
-    protected function respondWithToken($token)
-    {
-        return response()->json([
-            'status' => 'success',
-            'token' => $token,
-            'authorization' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL()*60,
-        ]);
-    }
-
+    
     /**
      * logout user.
      */
@@ -99,15 +90,15 @@ class AuthController extends Controller
      */
     public function profile()
     {
-        try {
+      if(auth()->user()){
             return response()->json([
                 'status' => 'true',
                 'data' => auth()->user(),
              ]);
-        } catch (\Exception $e) {
+        } else{
             return response()->json([
                 'status' => 'false',
-                'message' => $e->getMessage(),
+                'message' => 'Unauthorized',
              ]);
         }
     }
@@ -195,6 +186,7 @@ class AuthController extends Controller
         }
     }
 
+    // Verify Email
     public function verifyEmail($token)
     {
         $user = User::where('remember_token', $token)->get();
@@ -214,4 +206,30 @@ class AuthController extends Controller
             return view('404');
         }
     }
+
+    // Refresh Token
+    public function refreshToken()
+    {
+        if(auth()->user())
+        {
+            return $this -> respondWithToken(auth()->refresh());
+        }
+        else{
+            return response()->json([
+                'status' => 'false',
+                'message' => 'Unauthorized'
+            ]);
+        }
+    }
+
+    protected function respondWithToken($token)
+    {
+        return response()->json([
+            'status' => 'success',
+            'token' => $token,
+            'authorization' => 'bearer',
+            'expires_in' => auth()->factory()->getTTL()*60,
+        ]);
+    }
+
 }
