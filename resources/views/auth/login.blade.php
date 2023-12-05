@@ -84,7 +84,7 @@
  
           <button type="submit" class="btn">Sign In</button>
           <p>Dont have an account? <a href="{{route('registration')}}">Register</a></p>
-           <a href="{{route('reset.password.load')}}">Forgot password?</a> 
+           <a href="{{route('forget.password')}}">Forgot password?</a> 
          </div>
 
          

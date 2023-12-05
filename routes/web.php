@@ -26,6 +26,10 @@ Route::get('/profile', function () {
     return view('auth.profile');
 })->name('profile.view');
 
+Route::get('/forget-password', function () {
+    return view('password.forget_password');
+})->name('forget.password');
+
 Route::get('/verify-email/{token}',[AuthController::class,'verifyEmail']) -> name('profile.email.verified');
 Route::get('/reset-password',[AuthController::class,'resetPasswordLoad']) -> name('reset.password.load');
 Route::post('/reset-password',[AuthController::class,'resetPassword']) -> name('password.reset');
