@@ -240,8 +240,7 @@ class AuthController extends Controller
     //reset forgot password
     public function forgetPassword(Request $request)
     {
-        if(auth()->user()){
-            $validator = Validator::make($request->only('email'),[
+             $validator = Validator::make($request->only('email'),[
                 'email' => 'required|string|email',
              ]);
     
@@ -280,23 +279,17 @@ class AuthController extends Controller
 
                 return response()->json([
                     'status' => 'true',
-                    'message' => 'Please check your mail for the reset password email'
+                    'message' => 'Please Check Your Email'
                 ]);
 
             }
             else{
                 return response()->json([
                     'status' => 'false',
-                    'message' => 'user with this email is not found'
+                    'message' => 'User Email is Not Found'
                 ]);
             }
-        }
-        else{
-            return response()->json([
-                'status' => 'false',
-                'message' => 'Unauthorized'
-            ]);
-        }
+       
     }
 
     //reset password view load

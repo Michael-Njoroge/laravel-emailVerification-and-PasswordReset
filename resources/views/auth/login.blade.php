@@ -19,6 +19,10 @@
         font-size: 15px;
         font-weight: bold;
         margin-bottom: 5px;
+        transition: opacity 0.3s ease;
+    }
+    .btn:hover{
+      opacity: 0.8;
     }
   
     input
@@ -40,7 +44,7 @@
     {
         background: gainsboro;
         width: 500px;
-        height: 400px;
+        height: 450px;
         align-items: center;
         justify-content: center;
         overflow: hidden;
@@ -107,6 +111,10 @@
                      if(data.status == 'false'){
                         $("#login_form")[0].reset();
                         $(".result").text(data.message);
+                        setTimeout(function()
+                        {
+                          $(".error").text("");
+                        },3000);
                      }
                      else if(data.status == 'success'){
                         localStorage.setItem("access_token",data.authorization+" "+data.token);

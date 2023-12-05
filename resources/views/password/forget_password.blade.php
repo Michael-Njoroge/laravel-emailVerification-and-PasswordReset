@@ -4,6 +4,20 @@
   span{
     color: red;
   }
+  .result{
+    color: red;
+    position: absolute;
+    transform: translateX(3%);
+    padding: 2px;
+    left: 25%;
+    font-size: 20px;
+    top: 12rem;
+    }
+  .success{
+    color: green;
+    text-align: center;
+    font-size: 16px;
+    }
  
   .btn
     {
@@ -34,23 +48,26 @@
         
      }
 
-    form
+    .form
     {
         background: gainsboro;
         width: 500px;
-        height: 250px;
+        height: 260px;
         align-items: center;
         justify-content: center;
         overflow: hidden;
         transform: translateY(65%);   
         margin: 0 auto;    
-        border-radius: 20px;         
-    }
+        border-radius: 20px;   
+      }
  
   
 </style>
 
  <div class="form">
+ <p class="result"></p>
+ <p class="success"></p>
+
      <form id="forgetForm" >
         @csrf
         <div style="text-align: center;">
@@ -66,14 +83,58 @@
           </div>
  
       </form>
-      <p class="result"></p>
 </div>
 
  <script type="text/javascript">
     $(document).ready(function(){
-    $('#forgetForm').submit(function(event){
 
+    $('#forgetForm').submit(function(event){
+      event.preventDefault();
+
+      var formData = $(this).serialize();
+
+      $.ajax({
+        url: "http://127.0.0.1:8000/api/forget-password",
+        type: "POST",
+        data: formData,
+        success: function(data){
+          console.log(data);
+
+          if(data.status == 'true')
+          {
+            $("#forgetForm")[0].reset();
+            $(".success").text(data.message);
+            setTimeout(function()
+            {
+              $(".success").text("")
+            },3000);
+
+           }
+           else if(data.status == 'false')
+           {
+             $(".result").text(data.message);
+            setTimeout(function()
+            {
+              $(".result").text("")
+            },3000);
+            }
+            else{
+              errorMessage(data);
+              setTimeout(function()
+            {
+              $(".error").text("");
+            },3000);
+            }
+        }
+       });
     });
+    function errorMessage(message){
+          $(".error").text("");
+          $.each(message, function (key,value){
+              $("."+key+"_err").text(value);
+ 
+          });
+        }
 });
  </script>
 
