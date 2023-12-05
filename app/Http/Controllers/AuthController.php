@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PasswordReset;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
@@ -9,7 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
- 
+use Nette\Utils\Random;
+
 class AuthController extends Controller
 {
     /**
@@ -235,7 +237,55 @@ class AuthController extends Controller
     //reset forgot password
     public function forgetPassword(Request $request)
     {
-        
+        if(auth()->user()){
+
+            $user = User::where('email',$request->email)->get();
+
+            if(count($user)>0){
+                $token = Str::random(40);
+                $domain = URL::to('/');
+                $url = $domain.'/reset-password?token='.$token;
+
+                $data['url'] = $url;
+                $data['email'] = $request->email;
+                $data['title'] = 'Password Reset';
+                $data['body'] = 'Please click the link below to reset your password';
+
+                Mail::send('mail.forgotPasswordMail',['data'=>$data],function($message) use ($data){
+                    $message->to($data['email'])->subject($data['title']);
+                });
+
+                $dateTime = Carbon::now()->format('Y-m-d H:i:s');
+
+                PasswordReset::updateOrCreate(
+                [
+                    'email' => $request->email
+                ],
+                [
+                    'email' => $request->email,
+                    'token' => $token,
+                    'created_at' => $dateTime
+                ]);
+
+                return response()->json([
+                    'status' => 'true',
+                    'message' => 'Please check your mail for the reset password email'
+                ]);
+
+            }
+            else{
+                return response()->json([
+                    'status' => 'false',
+                    'message' => 'user with this email is not found'
+                ]);
+            }
+        }
+        else{
+            return response()->json([
+                'status' => 'false',
+                'message' => 'Unauthorized'
+            ]);
+        }
     }
 
 }
