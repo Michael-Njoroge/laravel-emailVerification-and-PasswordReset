@@ -28,5 +28,5 @@ Route::get('/profile', function () {
 
 Route::get('/verify-email/{token}',[AuthController::class,'verifyEmail']) -> name('profile.email.verified');
 Route::get('/reset-password',[AuthController::class,'resetPasswordLoad']) -> name('reset.password.load');
-// Route::post('/reset-password',[AuthController::class,'resetPassword']) -> name('password.reset');
+Route::post('/reset-password',[AuthController::class,'resetPassword']) -> name('password.reset');
 

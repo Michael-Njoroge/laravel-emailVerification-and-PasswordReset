@@ -7,10 +7,13 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Nette\Utils\Random;
+
+use function Laravel\Prompts\password;
 
 class AuthController extends Controller
 {
@@ -310,6 +313,23 @@ class AuthController extends Controller
         else{
             return view('404');
         }
+    }
+
+    //password reset functionality
+    
+    public function resetPassword(Request $request)
+    {
+        $request->validate([
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+
+        $user = User::find($request->id);
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        PasswordReset::where('email',$user->email)->delete();
+
+        return view('password.password_is_reset');
     }
 
 }
