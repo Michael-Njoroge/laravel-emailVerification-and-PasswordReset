@@ -238,8 +238,16 @@ class AuthController extends Controller
     public function forgetPassword(Request $request)
     {
         if(auth()->user()){
+            $validator = Validator::make($request->only('email'),[
+                'email' => 'required|string|email',
+             ]);
+    
+            if($validator->fails()){
+                return response()->json($validator->errors());
+            }
+            $email = $request->email;
 
-            $user = User::where('email',$request->email)->get();
+            $user = User::where('email',$email)->get();
 
             if(count($user)>0){
                 $token = Str::random(40);
@@ -247,7 +255,7 @@ class AuthController extends Controller
                 $url = $domain.'/reset-password?token='.$token;
 
                 $data['url'] = $url;
-                $data['email'] = $request->email;
+                $data['email'] = $email;
                 $data['title'] = 'Password Reset';
                 $data['body'] = 'Please click the link below to reset your password';
 
@@ -259,10 +267,10 @@ class AuthController extends Controller
 
                 PasswordReset::updateOrCreate(
                 [
-                    'email' => $request->email
+                    'email' => $email
                 ],
                 [
-                    'email' => $request->email,
+                    'email' => $email,
                     'token' => $token,
                     'created_at' => $dateTime
                 ]);
