@@ -296,4 +296,20 @@ class AuthController extends Controller
         }
     }
 
+    //reset password view load
+
+    public function resetPasswordLoad(Request $request)
+    {
+        $resetData = PasswordReset::where('token',$request->token)->get();
+
+        if(isset($request->token) && count($resetData)>0){
+            $user = User::where('email',$resetData[0]['email']) ->get();
+            return view('password.resetPassword',compact('user'));
+
+        }
+        else{
+            return view('404');
+        }
+    }
+
 }
