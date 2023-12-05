@@ -232,4 +232,10 @@ class AuthController extends Controller
         ]);
     }
 
+    //reset forgot password
+    public function forgetPassword(Request $request)
+    {
+        
+    }
+
 }

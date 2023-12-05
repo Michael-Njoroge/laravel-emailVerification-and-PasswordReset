@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
+Route::post('/forget-password',[AuthController::class,'forgetPassword']) -> name('forget-password');
+
 Route::group(['middleware' => 'api'],function($routes){
     Route::post('/register',[AuthController::class,'register']) -> name('register');
     Route::post('/login',[AuthController::class,'login']) -> name('login');
